@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Combobox, ComboboxInput, ComboboxOptions, ComboboxOption } from '@headlessui/react'
-import { Check, Loader2, LogOut } from 'lucide-react'
+import { Loader2, LogOut } from 'lucide-react'
 import { supabase } from './lib/supabase'
-import { Session } from '@supabase/supabase-js'
+import type { Session } from '@supabase/supabase-js'
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -121,8 +121,8 @@ export default function App() {
       setName(''); setTipoQuery(''); setSelectedTipo(''); setSubtipo(''); setSensacion(''); setRazon('');
       setUrlWebsite(''); setUrlInstagram(''); setUrlMaps('');
       
-    } catch (err: any) {
-      setErrorMsg(err.message || 'Error al guardar el objetivo.')
+    } catch (err: unknown) {
+      setErrorMsg(err instanceof Error ? err.message : 'Error al guardar el objetivo.')
     } finally {
       setLoading(false)
     }
@@ -202,7 +202,7 @@ export default function App() {
           {/* Tipo Principal (Combobox) */}
           <div className="relative z-50">
             <label className="block text-sm font-medium text-neutral-300 mb-1">Tipo principal</label>
-            <Combobox value={selectedTipo} onChange={setSelectedTipo} onClose={() => setTipoQuery('')}>
+            <Combobox value={selectedTipo} onChange={(val) => setSelectedTipo(val || '')} onClose={() => setTipoQuery('')}>
               <div className="relative">
                 <ComboboxInput
                   className="w-full bg-neutral-800 border-neutral-700 rounded-xl px-4 py-3 text-neutral-100 focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder-neutral-500"
