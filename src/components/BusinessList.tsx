@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Loader2, Filter, Search, Store, MapPin, ExternalLink, Instagram, Globe } from 'lucide-react'
+import { Loader2, Store, MapPin, ExternalLink, Globe, Link2 } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 
 export default function BusinessList() {
@@ -140,7 +140,7 @@ export default function BusinessList() {
                   )}
                   {insta && (
                     <a href={insta} target="_blank" rel="noopener noreferrer" className="p-2 bg-neutral-950 hover:bg-neutral-800 rounded-xl text-neutral-400 hover:text-pink-400 transition-colors" title="Instagram">
-                      <Instagram className="w-5 h-5" />
+                      <Link2 className="w-5 h-5" />
                     </a>
                   )}
                   {maps && (
