@@ -112,7 +112,10 @@ export default function IngestionForm() {
           nivel,
           intencion,
           materialidad: materialidades,
-          contexto: contexto || null
+          contexto: contexto || null,
+          website_url: urlWebsite || null,
+          instagram_url: urlInstagram || null,
+          maps_url: urlMaps || null
         })
         .select('id')
         .single()
