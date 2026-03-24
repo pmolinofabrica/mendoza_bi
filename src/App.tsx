@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Loader2, LogOut } from 'lucide-react'
 import { supabase } from './lib/supabase'
-import { Session } from '@supabase/supabase-js'
+import type { Session } from '@supabase/supabase-js'
 
 const OPTIONS = {
   tipo_principal: ['bodega', 'hotel', 'cabaña', 'restaurante', 'estudio_diseño', 'arquitecto', 'experiencia_turistica'],
