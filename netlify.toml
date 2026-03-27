@@ -1,0 +1,11 @@
+[build]
+  # El comando que usa Vite para compilar el proyecto
+  command = "npm run build"
+  # La carpeta donde Vite escupe los archivos compilados
+  publish = "dist"
+
+[[redirects]]
+  # Redirige cualquier ruta al index.html (Vital para que funcionen las SPA en React)
+  from = "/*"
+  to = "/index.html"
+  status = 200

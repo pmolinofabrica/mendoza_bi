@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
+@theme {
+  /* You can add theme extensions here in v4 */
+}
+
+/* Utilities for hiding scrollbar but keeping functionality */
+@utility scrollbar-hide {
+  /* IE and Edge */
+  -ms-overflow-style: none;
+  /* Firefox */
+  scrollbar-width: none;
+  /* Safari and Chrome */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -7,7 +23,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #171717; /* a bit darker for better contrast */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -20,12 +36,4 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
-}
-
-/* Base UI styles for dark mode preference */
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #f3f4f6;
-  }
 }
