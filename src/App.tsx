@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Loader2, LogOut, PlusCircle, List as ListIcon } from 'lucide-react'
+import { Loader2, LogOut, PlusCircle, List as ListIcon, Upload } from 'lucide-react'
 import { supabase } from './lib/supabase'
 import type { Session } from '@supabase/supabase-js'
 
 import IngestionForm from './components/IngestionForm'
 import BusinessList from './components/BusinessList'
+import CsvUpload from './components/CsvUpload'
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -16,7 +17,7 @@ export default function App() {
   const [loginError, setLoginError] = useState('')
 
   // View state
-  const [view, setView] = useState<'form' | 'list'>('form')
+  const [view, setView] = useState<'form' | 'list' | 'csv'>('form')
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -78,7 +79,7 @@ export default function App() {
           <div>
             <h1 className="text-2xl font-bold tracking-tight">Mendoza BI</h1>
             <p className="text-neutral-400 text-xs mt-1 uppercase tracking-wider font-semibold">
-              {view === 'form' ? 'Nueva Ingesta' : 'Listado de Negocios'}
+              {view === 'form' ? 'Nueva Ingesta' : view === 'list' ? 'Listado de Negocios' : 'Carga Masiva CSV'}
             </p>
           </div>
           
@@ -98,6 +99,13 @@ export default function App() {
                 <ListIcon className="w-4 h-4 mr-2" />
                 Explorar
               </button>
+              <button 
+                onClick={() => setView('csv')}
+                className={`flex items-center px-4 py-2 rounded-xl text-sm font-medium transition-all ${view === 'csv' ? 'bg-neutral-800 text-white shadow-sm' : 'text-neutral-400 hover:text-neutral-200'}`}
+              >
+                <Upload className="w-4 h-4 mr-2" />
+                CSV
+              </button>
             </div>
             
             <button onClick={handleLogout} className="p-3 text-neutral-400 hover:text-white bg-neutral-900 rounded-2xl transition-colors border border-neutral-800 ml-2" title="Cerrar sesión">
@@ -107,7 +115,7 @@ export default function App() {
         </div>
 
         {/* Dynamic View */}
-        {view === 'form' ? <IngestionForm /> : <BusinessList />}
+        {view === 'form' ? <IngestionForm /> : view === 'list' ? <BusinessList /> : <CsvUpload />}
         
       </div>
     </div>
